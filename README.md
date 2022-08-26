@@ -1,5 +1,5 @@
-# Descarga de Datos de Data Mexico en RStudio
-# Con esta actividad practicamos la descarga de datos desde diferentes fuentes de internet para analizar sus estructuras y formatos.
+# Descarga de Datos crudos en RStudio
+# Punto 1 de Asignación - Con esta actividad practicamos la descarga de datos desde diferentes fuentes de internet para analizar sus estructuras y formatos.
 
 Tras revisar diferentes fuentes de datos y sus contenidos, decidí que quiero enfocarme en la siguiente hipótesis:
 
@@ -9,7 +9,7 @@ Sé que son muchos los factores que influyen en la presencia de violencia contra
 
 Lamentablemente muchas mujeres tienen que soportar actos de violencia y vivir con sus agresores por ser su única opción; no cuentan con estabilidad económica o con la capacidad para poder independizarse. Creo que, si se da mayor visualización a la importancia de impulsar y apoyar la educación hacia la mujer, así como promover que sean económicamente independientes por medio de la igualdad de oportunidades laborales y salarios, podríamos causar un impacto en la disminución de estos actos en contra del genero femenino. 
 
-# Seleccione la base de datos de crímenes de la página de Data Mexico, pidiendo que me diera la información agrupada por tipo de crimen, año y municipio:
+#Seleccione la base de datos de crímenes de la página de Data Mexico, pidiendo que me diera la información agrupada por tipo de crimen, año y municipio:
 ```{r}
 #Asignar el directorio donde estare trabajando:
 setwd("C:\\Users\\PANA1\\Documents\\Maestría\\Ing Caracteristicas")
@@ -20,7 +20,6 @@ getwd()
 #Mandar llamar las librerías que se necesitaran para descargar nuestros datos:
 library(httr)
 library(jsonlite)
-library(plotly)
 
 ```
 
@@ -38,6 +37,7 @@ names(Datos)
 "Pedimos que solo nos de la data de la variable "Datos" que declaramos anteriormente:
 Datos<-Datos$data
 
+print(Datos)
 ```
 
 
@@ -46,4 +46,45 @@ Al haber pedido mis datos por municipios, fueron cerca de 750,000 registros, por
 
 Decidí hacer otro ejemplo filtrando solo por "Nación", en este caso México, por lo cual, el flujo corrió mucho mas rápido y me dio los siguientes resultados ya con mis datos de JSON convertidos:
 ![image](https://user-images.githubusercontent.com/111605081/186818203-da8dfb74-73e3-4b5a-91c9-4cb5f904d53d.png)
+
+
+# Seguimos los mismos pasos que en el proceso anterior, solo que ahora descargamos la base de datos de empleabilidad por sector y sexo:
+
+```{r}
+empleabilidad.url = GET("https://api.datamexico.org/tesseract/cubes/inegi_economic_census_sex/aggregate.jsonrecords?drilldowns%5B%5D=Geography.Geography.State&drilldowns%5B%5D=Year.Year.Year&drilldowns%5B%5D=Sex.Sex.Sex&drilldowns%5B%5D=Industry.Industry.Sector&measures%5B%5D=Employed+workers&parents=false&sparse=false")
+
+rawToChar(empleabilidad.url$content)
+
+Datos2 = fromJSON(rawToChar(empleabilidad.url$content))
+names(Datos2)
+
+Datos2<-Datos2$data
+
+print(Datos2)
+```
+Como "Datos2", nos arroja los siguientes resultados:
+![image](https://user-images.githubusercontent.com/111605081/186915288-d19246d0-0051-46d1-a3f1-acde559c2b4a.png)
+
+
+# Punto 2 de Asignación - Descarga desde otra fuente de datos.
+```{r}
+#Al tratar con datos en estructura JSON, se carga la librería pertinente:
+
+library(jsonlite)
+library(dplyr)
+
+#Mandamos llamar nuestros datos desde el url, que en este caso es de las bases de datos del INEGI. (Para poder accesar es necesario solicitar un token):
+
+json_INEGI <- "https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/6200027788/es/07000026/true/BISE/2.0/8fbac81c-e270-2f88-47b0-a4b8aae60b0d?type=json"
+
+#Convertimos nuestros datos de JSON a caracteres normales:
+
+EducacionSuperior <- fromJSON(json_INEGI)
+
+#El "identificador" viene en codigo, por lo que tendremos que busacr su traducción:
+
+json_INEGI.Indicador <- "https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/CL_INDICATOR/6200027788/es/BISE/2.0/8fbac81c-e270-2f88-47b0-a4b8aae60b0d?type=json"
+
+
+EducacionSuperiorIndicador <- fromJSON(json_INEGI.Indicador)
 
