@@ -1,4 +1,4 @@
-# Descarga de Datos
+# Descarga de Datos de Data Mexico en RStudio
 # Con esta actividad practicamos la descarga de datos desde diferentes fuentes de internet para analizar sus estructuras y formatos.
 
 Tras revisar diferentes fuentes de datos y sus contenidos, decidí que quiero enfocarme en la siguiente hipótesis:
