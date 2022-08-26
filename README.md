@@ -87,4 +87,10 @@ json_INEGI.Indicador <- "https://www.inegi.org.mx/app/api/indicadores/desarrolla
 
 
 EducacionSuperiorIndicador <- fromJSON(json_INEGI.Indicador)
+```
 
+# Punto 3 de Asignación - Estructura de los datos que se descargaron sobre personas desaparecidas a nivel nacional.
+## ¿Qué estructura encontraste en los datos?
+## ¿Se pueden poner los datos en forma tabular para algún problema que nos interese en particular?
+Los datos "Desaparecidos en corte nacional" se descargan en formato JSON, sin embargo, ya existen muchas ibrerías que pueden transformar cadenas de texto en JSON a caracteres string, lo que facilita su manejo.
+La url de "Desaparecidos RNPDNO" descarga los datos en un archivo Zip, pero al igual que con los datos pasados, tambien existen librerias que descomprimen los datos para tenerlos de facil manejo. 
