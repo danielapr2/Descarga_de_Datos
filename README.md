@@ -43,3 +43,7 @@ Datos<-Datos$data
 
 Al haber pedido mis datos por municipios, fueron cerca de 750,000 registros, por lo que el programa tardo muchos minutos en correr:
 ![image](https://user-images.githubusercontent.com/111605081/186813470-7d851a5b-6173-4b29-b85f-d836ddc33438.png)
+
+Decidí hacer otro ejemplo filtrando solo por "Nación", en este caso México, por lo cual, el flujo corrió mucho mas rápido y me dio los siguientes resultados ya con mis datos de JSON convertidos:
+![image](https://user-images.githubusercontent.com/111605081/186818203-da8dfb74-73e3-4b5a-91c9-4cb5f904d53d.png)
+
